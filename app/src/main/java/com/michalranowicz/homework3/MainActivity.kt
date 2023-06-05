@@ -39,17 +39,17 @@ fun Screen() {
 }
 
 fun displayCarInformation() {
-    val car1 = NewCar("Toyota", "CorollaIV", 2022, true, 25000.0)
+    val car1 = NewCar("Toyota", "CorollaIV", 2022,  25000.0,FuelType.ELECTRIC)
     car1.addExtraOption(ExtraOption.GPS)
     car1.addExtraOption(ExtraOption.LeatherSeats)
 
-    val car2 = NewCar("Honda", "CivicV", 2022, true, 27000.0)
+    val car2 = NewCar("Honda", "CivicV", 2022,  27000.0,FuelType.HYBRID)
     car2.addExtraOption(ExtraOption.Sunroof)
 
-    val car3 = NewCar("Ford", "MustangE", 2022, true, 50000.0)
-    val usedCar1 = UsedCar("Toyota", "Corolla", 2018, false, 15000.0, 50000)
-    val usedCar2 = UsedCar("Honda", "Civic", 2017, false, 14000.0, 60000)
-    val usedCar3 = UsedCar("Ford", "Mustang", 2015, false, 30000.0, 1800000)
+    val car3 = NewCar("Ford", "MustangE", 2022,  50000.0,FuelType.COMBUSTION)
+    val usedCar1 = UsedCar("Toyota", "Corolla", 2018, false, 15000.0, 50000,FuelType.HYBRID)
+    val usedCar2 = UsedCar("Honda", "Civic", 2017, false, 14000.0, 60000,FuelType.COMBUSTION)
+    val usedCar3 = UsedCar("Ford", "Mustang", 2015, false, 30000.0, 1800000,FuelType.COMBUSTION)
 
     val carStock = CarStock()
     carStock.addCar(car1)
@@ -61,22 +61,27 @@ fun displayCarInformation() {
 
     println("KOMIS u JANUSZA")
 
-    println("All available cars")
+    println("// All available cars")
     carStock.displayStock()
 
-    println("Available used Cars:")
+    println("// Available used Cars:")
+    carStock.displayUsedCars()
+
+    println("//Available new Cars:")
+    carStock.displayNewCars()
+
     val localDate = LocalDate.now()
     val dayOfWeek = localDate.dayOfWeek.value
     println(dayOfWeek)
     val allCars = carStock.getAllCars()
     for (car in allCars) {
-        if (car is UsedCar && dayOfWeek in 6..7) {
+        if (car is UsedCar && dayOfWeek in 0..3) {
             car.displayInfo(5)
         } else if (car is UsedCar) {
             car.displayInfo()
         }
     }
-    println("All Extras:")
+    println("// All Extras:")
     val allExtras = ExtraOption.values()
     for (extra in allExtras) {
         println("- ${extra.name}: ${extra.price}")

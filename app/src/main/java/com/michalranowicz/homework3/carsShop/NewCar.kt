@@ -1,14 +1,13 @@
 package com.michalranowicz.homework3.carsShop
 
 
-
 class NewCar(
     brand: String,
     model: String,
     year: Int,
-    isnew: Boolean,
     val basePrice: Double,
-) : Car(brand, model, year, isnew) {
+    val fuelType: FuelType,
+) : CarFuelType(brand, model, year, isnew = true) {
 
     private val extras = mutableListOf<ExtraOption>()
 
